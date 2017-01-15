@@ -3,42 +3,45 @@
 <head>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <title>JS API Tutorial</title>
+    <title>JavaScript API tutorial</title>
     <style>
-        #map-canvas {
-            height: 300px;
-            width: 600px;
-            margin: 0px;
-            padding: 0px;
-            margin-top: 10px;
+        .tweet {
+            padding: 5px;
+        }
+        .tweet:nth-child(even) {
+            background: #CCC
+        }
+        .tweet:nth-child(odd) {
+            background: #FFF
         }
     </style>
 </head>
 <body>
-	<div id="map-canvas" class="map_canvas"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBndMPduHLCKGV-PSzMk-fVDx8z3Xi4OqY&callback=initMap"
-    async defer></script>
-    <script type="text/javascript">
-        var map;
-        function initMap() {
-            var mapOptions = {
-                center: new google.maps.LatLng(-34.397, 150.644), 
-                zoom: 5,
-                backgroundColor: "#000000",
-                mapTypeId: google.maps.MapTypeId.SATELLITE
+    <div id="output"></div>
+    <script>
+        var output = document.getElementById("output");
+        function myFunction() {
+            var jsonoutput = '';
+            if (this.readyState == 4 && this.status == 200) {
+                var json = JSON.parse(this.responseText);
+                /*
+                console.log(json.statuses);
+                for (var a in json.statuses) {
+                    jsonoutput = jsonoutput + '<div class="tweet">' + json.statuses[a].text + '</div>';
+                }
+                */
+                console.log(json);
+                for (var a in json) {
+                    jsonoutput = jsonoutput + '<div class="tweet">' + json[a].id_str + '</div>';
+                }
+                output.innerHTML = jsonoutput;
             }
-            
-            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-            
-            var marker = new google.maps.Marker({
-                position: {lat: -34.397, lng: 150.644},
-                map: map,
-                title: "3rd house"
-            });
-            
-            google.maps.event.addListener(marker, 'click', function() { console.log('clicked'); });
-            google.maps.event.addListener(map, 'bounds_changed', function() { console.log('resized'); });
         }
+        var myRequest = new XMLHttpRequest();
+        myRequest.onreadystatechange = myFunction;
+        myRequest.open("GET", "twitter.php");
+        myRequest.send();
+        console.log(myRequest);
     </script>
 </body>
 </html>
