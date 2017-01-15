@@ -6,15 +6,24 @@
 <body>
 	<div id="output"></div>
 	<script type="text/javascript">
+        var output = document.getElementById("output");
+        
 		function myFunction() {
-            if(this.readyState == 4 && this.status == 200)
-            var json = JSON.parse(this.responseText);
-			console.log(json);
+            var jsonoutput = '';
+            if(this.readyState == 4 && this.status == 200) {
+                var json = JSON.parse(this.responseText);    
+                console.log(json);
+                for(var g in json) {
+                    jsonoutput = jsonoutput + json[g].company + '<br />';
+                }
+                output.innerHTML = jsonoutput;
+            }
 		}
 		
 		var myRequest = new XMLHttpRequest();
+        myRequest.overrideMimeType("application/json");
 		myRequest.onload = myFunction;
-		myRequest.open('GET', 'https://api.myjson.com/bins/wuzqn', true);
+		myRequest.open('GET', 'json.json', true);
 		myRequest.send(null);
 		console.log(myRequest);
 	</script>
