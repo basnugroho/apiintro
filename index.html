@@ -19,7 +19,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBndMPduHLCKGV-PSzMk-fVDx8z3Xi4OqY&callback=initMap"
     async defer></script>
     <script type="text/javascript">
-        var map
+        var map;
         function initMap() {
             var mapOptions = {
                 center: new google.maps.LatLng(-34.397, 150.644), 
@@ -27,7 +27,14 @@
                 backgroundColor: "#000000",
                 mapTypeId: google.maps.MapTypeId.SATELLITE
             }
+            
             map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            
+            var marker = new google.maps.Marker({
+                position: {lat: -34.397, lng: 150.644},
+                map: map,
+                title: "3rd house"
+            });
         }
     </script>
 </body>
