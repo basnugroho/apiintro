@@ -24,22 +24,26 @@
             var jsonoutput = '';
             if (this.readyState == 4 && this.status == 200) {
                 var json = JSON.parse(this.responseText);
-                /*
+                
                 console.log(json.statuses);
                 for (var a in json.statuses) {
                     jsonoutput = jsonoutput + '<div class="tweet">' + json.statuses[a].text + '</div>';
                 }
-                */
+                /*            
                 console.log(json);
                 for (var a in json) {
                     jsonoutput = jsonoutput + '<div class="tweet">' + json[a].id_str + '</div>';
                 }
+                */
+                
+                
                 output.innerHTML = jsonoutput;
+                
             }
         }
         var myRequest = new XMLHttpRequest();
         myRequest.onreadystatechange = myFunction;
-        myRequest.open("GET", "twitter.php");
+        myRequest.open("GET", "twitter2.php");
         myRequest.send();
         console.log(myRequest);
     </script>
