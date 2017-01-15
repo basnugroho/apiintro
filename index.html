@@ -35,6 +35,9 @@
                 map: map,
                 title: "3rd house"
             });
+            
+            google.maps.event.addListener(marker, 'click', function() { console.log('clicked'); });
+            google.maps.event.addListener(map, 'bounds_changed', function() { console.log('resized'); });
         }
     </script>
 </body>
